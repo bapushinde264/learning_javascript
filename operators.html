@@ -30,5 +30,53 @@
         document.write(x + "<br>"); //22
         document.write(y); //12
     </script>
+
+    <!-- Comparison Operators <,>,<=,>=,==,=== -->
+     <script>
+        var p = 17;
+        var q = "17";
+
+        document.write("<br>");
+        if(p==q){          //True
+            document.write("true <br>");
+        }else{
+            document.write("false");
+        }
+
+         if(p===q){      //False
+            document.write("true");
+        }else{
+            document.write("false");
+        }
+     </script>
+
+     <!-- Logical Operators &&, ||, ! -->
+      <script>
+        document.write("<br>");
+        var age = 17;
+        if(age >= 18 && age <=100){
+            document.write("Eligible for vote");
+        }else{
+            document.write("Not Eligible");
+        }
+      </script>
+
+      <script>
+        document.write("<br>");
+        var day = "Monday";
+        if(day === "Saturday" || day === "Monday"){
+            document.write("Its Weekend");
+        }else{
+            document.write("Its Weekdays");
+        }
+      </script>
+
+      <script>
+        document.write("<br>");
+        let our_age = 19;
+        let eligibility = (our_age >= 18) ? "Eligible for vote" : "Not Eligible";
+        document.write(eligibility);
+      </script>
+     
 </body>
 </html>
