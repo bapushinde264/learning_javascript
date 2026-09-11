@@ -20,15 +20,17 @@
 
             <h3 class="text-center mt-3 mb-3">Contact Us</h3>
 
-            <form>
+            <form onsubmit="return validate()">
 
                 <!-- Name -->
                 <div class="mb-2">
                     <label for="name" class="form-label">Name:</label>
                     <input type="text"
                            id="name"
+                           name="name"
                            class="form-control"
                            placeholder="Your name">
+                           <span class="text-danger" id="nameError"></span>
                 </div>
 
                 <!-- Email -->
@@ -36,8 +38,11 @@
                     <label for="email" class="form-label">Email:</label>
                     <input type="email"
                            id="email"
+                           name="email"
                            class="form-control"
                            placeholder="Your email">
+                           <span class="text-danger" id="emailError"></span>
+                           
                 </div>
 
                 <!-- Mobile Number -->
@@ -45,17 +50,21 @@
                     <label for="mobile" class="form-label">Mobile Number:</label>
                     <input type="tel"
                            id="mobile"
+                           name="mobile"
                            class="form-control"
                            placeholder="Your mobile number">
+                           <span class="text-danger" id="mobileError"></span>
                 </div>
 
                 <!-- Password -->
                 <div class="mb-2">
                     <label for="password" class="form-label">Password:</label>
                     <input type="password"
+                           name="password"
                            id="password"
                            class="form-control"
                            placeholder="Enter password">
+                           <span class="text-danger" id="passwordError"></span>
                 </div>
 
                 <!-- Confirm Password -->
@@ -66,8 +75,10 @@
 
                     <input type="password"
                            id="confirmPassword"
+                           name="confirmPassword"
                            class="form-control"
                            placeholder="Confirm password">
+                           <span class="text-danger" id="confirmPasswordError"></span>
                 </div>
 
                 <!-- Message -->
@@ -75,9 +86,11 @@
                     <label for="message" class="form-label">Message:</label>
 
                     <textarea id="message"
+                    name="message"
                               class="form-control"
                               rows="3"
                               placeholder="Your message"></textarea>
+                              <span class="text-danger" id="messageError"></span>
                 </div>
 
                 <!-- Gender -->
@@ -119,17 +132,21 @@
                             Other
                         </label>
                     </div>
+                    <span class="text-danger" id="genderError"></span>
                 </div>
 
                 <!-- Terms -->
                 <div class="form-check mb-2">
                     <input class="form-check-input"
                            type="checkbox"
+                           id="agree"
+                           name="agree"
                            id="terms">
 
                     <label class="form-check-label" for="terms">
                         I agree to the terms & conditions
                     </label>
+                    <span class="text-danger" id="agreeError"></span>
                 </div>
 
                 <!-- Submit -->
@@ -143,6 +160,96 @@
 
     </div>
 </div>
+
+<script>
+    function validate(){
+        //GEt form values
+        const name =document.getElementById("name").value.traim();
+        const email =document.getElementById("email").value.traim();
+        const mobile =document.getElementById("mobile").value.traim();
+        const password =document.getElementById("password").value.traim();
+        const confirmPassword = document.getElementById("confirmPassword").value.traim();
+        const message =document.getElementById("message").value.traim();
+        const gender =document.querySelector('input[name="gender"]:checked');
+        const agree =document.getElementById("agree").checked;
+
+        //Error span
+        const nameError = document.getElementById("nameError");
+        const emailError = document.getElementById("emailError");
+        const mobileError = document.getElementById("mobileError");
+        const passwordError = document.getElementById("passwordError");
+        const confirmPasswordError = document.getElementById("conformPasswordnameError");
+        const messageError = document.getElementById("genderError");
+        const agreeError = document.getElementById("agree");
+        }
+
+        // clear previous error messages
+        nameError.textContent = "";
+        emailError.textContent="";
+        mobileError.textContent = "";
+        passwordError.textContent = "";
+        confirmPasswordeError.textContent = "";
+        messsageError.textContent = "";
+        genderError.textContent = "";
+        agreeError.textContent = "";
+
+        let isValid = true;
+        //validate fields
+        if(name === "") {
+            nameError.textContent = "Please enter your name";
+            isvalid = false;
+        } else if (name.length < 3) {
+            nameError.textContent = "Please enter atleast 3 characters";
+            isvalid = false;
+        }
+        //email
+        if(email === "") {
+            emailError.textContent = "Please Enter your email";
+            isValid = false;
+        }
+        //mobile
+        if (mobile === "") {
+            mobileError.textContent = "Please Enter your mobile number";
+            isvalid = false;
+        } else if (!/\d{10}$/.test(mobile)) {
+            mobileError.textContent ="Please enter valid 10 digit mobile number";
+            isValid = false;
+        }
+        // Password validation
+        const passwordpattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+        if (password === ""){
+            passwordError.textContent = "Password must be atleast 6 characters, include a number & special character";
+            isValid = false;
+        }
+        //Confirm paasword
+        if(confirmpassword === ""){
+          confirmpasswordError.textContent = "Please confirm your password.";
+          isvalid = false; 
+        } else if(confirmPassword !== password) {
+            confirmPasswordError.textContent = "Passwor not matched";
+            isvalid = false;
+            
+        }
+
+        //Message
+        if(message === ""){
+            messageError.textContent = "Please enter your message";
+            isvalid = false;
+        }
+        if(!gender){
+            genderError.textContent = "Please select your gender";
+            isvalid = false;
+        }
+        if (!agree) {
+            agreeError.textContent = "You must agree to the Terms & condition";
+            invalid = false;
+        }
+        if(isValid) {
+            alert("Form submitted succesfully");
+        }
+        return isValid;
+     
+</script>
 
 </body>
 </html>
